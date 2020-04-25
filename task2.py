@@ -78,17 +78,17 @@ def createUserAcccount():
         print("Invalid Email Address")
         createUserAcccount()
 
-# Homepage interface
+# userUI interface
 
 
 def homeAnyOther():
     print("\n-------------------------- KINDLY CHOOSE WHAT NEXT --------------------------\n")
     print("1. Do you want to return to home page?")
     print("2. Do you want to exit\n")
-    promptQuestion = input("Reply: ")
-    if (promptQuestion == '1'):
-        homePage()
-    elif (promptQuestion == '2'):
+    ui_prompt = input("Reply: ")
+    if (ui_prompt == '1'):
+        userUI()
+    elif (ui_prompt == '2'):
         exit()
     else:
         exit()
@@ -106,7 +106,7 @@ def verifyAccount(email):
 
 def authenticateUser():
     print("\n--------------------------LOG IN--------------------------")
-    print("\n<=<=<=<=<=NOTE THAT YOUR EMAIL MUST HAVE THE DOMAIN 'hng.tech.com'=>=>=>=>=>\n")
+    print("\n----------NOTE THAT YOUR EMAIL MUST HAVE THE DOMAIN 'hng.tech.com'----------\n")
     userEmail = input("Enter email address: ").lower()
     userPassword = input("Enter password: ")
     if userEmail in staffDetails.keys():
@@ -121,34 +121,31 @@ def authenticateUser():
         print("1. Do you want to attempt the log in again?")
         print("2. Do you want to return to home page?")
         print("3. Do you want to open an Account with us\n")
-        promptQuestion = input("Reply: ")
-        if (promptQuestion == '1'):
+        ui_prompt = input("Reply: ")
+        if (ui_prompt == '1'):
             authenticateUser()
-        elif (promptQuestion == '2'):
-            homePage()
-        elif (promptQuestion == '3'):
+        elif (ui_prompt == '2'):
+            userUI()
+        elif (ui_prompt == '3'):
             createUserAcccount()
         else:
             exit()
 
-
-"""This function handles the home page"""
-
-
-def homePage():
+#User Interface
+def userUI():
     print("\n-------------------------------------------------------WELCOME TO HNG TECH-------------------------------------------------------\n")
-    print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< HOME PAGE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n")
-    print("\n<=<=<=<=<=NOTE THAT YOUR EMAIL MUST HAVE THE DOMAIN 'hng.tech.com'=>=>=>=>=>\n")
+    print("------------------------------------- HOME PAGE -------------------------------------\n")
+    print("\n----------NOTE: THAT YOUR EMAIL MUST HAVE THE DOMAIN 'hng.tech.com'=>=>=>=>=>\n")
     print("1. New Employee? Set up Your Account:")
     print("2. Log In")
     print("3. Exit\n")
 
-    promptQuestion = int(input("Reply: "))
-    if (promptQuestion == 1):
+    ui_prompt = int(input("Reply: "))
+    if (ui_prompt == 1):
         createUserAcccount()
-    elif (promptQuestion == 2):
+    elif (ui_prompt == 2):
         authenticateUser()
-    elif (promptQuestion == 3):
+    elif (ui_prompt == 3):
         exit()
     else:
         print("Enter a valid option")
@@ -159,4 +156,4 @@ def homePage():
 # It also handles Task 5
 var = 1
 while var == 1:
-    homePage()
+    userUI()
