@@ -28,7 +28,7 @@ def user_preffered_password(newEmail, first_name, last_name):
             staffDetails[newEmail] = {'password': desired_password, 'first_name': first_name, 'last_name': last_name}
             print("Account Was created sucessfully")
             print("\nKindly Login to confirm your sign-up")
-            authenticateUser()  # Log-in page function
+            userAuthorization()  # Log-in page function
         else:
             user_preffered_password(newEmail, first_name, last_name)
     else:
@@ -45,7 +45,7 @@ def confirmPassWord(newEmail, first_name, last_name):
         print("Registration Sucessful!\n")
         pprint.pprint(staffDetails[newEmail])
         print("\nLogin to confirm your sign-up")
-        authenticateUser()
+        userAuthorization()
     elif (reply.lower() == 'n'):
         user_preffered_password(newEmail, first_name, last_name)
     else:
@@ -64,7 +64,7 @@ def createUserAcccount():
     if (re.search(regex, newEmail)):
         if verifyAccount(newEmail):
             print("User Exist!! Try again")
-            homeAnyOther()
+            uiSubMenu()
         else:
             domain = newEmail.split('@')[1]
             if domain == "hng.tech.com":
@@ -79,9 +79,7 @@ def createUserAcccount():
         createUserAcccount()
 
 # userUI interface
-
-
-def homeAnyOther():
+def uiSubMenu():
     print("\n-------------------------- KINDLY CHOOSE WHAT NEXT --------------------------\n")
     print("1. Do you want to return to home page?")
     print("2. Do you want to exit\n")
@@ -100,30 +98,28 @@ def verifyAccount(email):
         return email
     return False
 
+#User Authorization
 
-"""This function handles the Log-In page"""
-
-
-def authenticateUser():
+def userAuthorization():
     print("\n--------------------------LOG IN--------------------------")
-    print("\n----------NOTE THAT YOUR EMAIL MUST HAVE THE DOMAIN 'hng.tech.com'----------\n")
+    print("\n----------NOTE THAT YOUR e-mail MUST HAVE THE DOMAIN 'hng.tech.com'----------\n")
     userEmail = input("Enter email address: ").lower()
     userPassword = input("Enter password: ")
     if userEmail in staffDetails.keys():
         if staffDetails[userEmail]['password'] == userPassword:
-            print("You're logged in\n")
-            pprint.pprint(staffDetails[userEmail])
-            homeAnyOther()
+            print("Login Sucessful! \n")
+            pprint.pprint(staffDetails[userEmail],)
+            uiSubMenu()
 
     else:
-        print("You are not authorized!\nWrong Email or password!!!")
-        print("\n-------------KINDLY CHOOSE WHAT NEXT-------------\n")
+        print("You are not authorized!\n Wrong credentials!!!")
+        print("\n-------------SELECT AN OPTION-------------\n")
         print("1. Do you want to attempt the log in again?")
         print("2. Do you want to return to home page?")
         print("3. Do you want to open an Account with us\n")
         ui_prompt = input("Reply: ")
         if (ui_prompt == '1'):
-            authenticateUser()
+            userAuthorization()
         elif (ui_prompt == '2'):
             userUI()
         elif (ui_prompt == '3'):
@@ -135,7 +131,7 @@ def authenticateUser():
 def userUI():
     print("\n-------------------------------------------------------WELCOME TO HNG TECH-------------------------------------------------------\n")
     print("------------------------------------- HOME PAGE -------------------------------------\n")
-    print("\n----------NOTE: THAT YOUR EMAIL MUST HAVE THE DOMAIN 'hng.tech.com'=>=>=>=>=>\n")
+    print("\n----------NOTE: THAT YOUR EMAIL MUST HAVE THE DOMAIN 'hng.tech.com'----------\n")
     print("1. New Employee? Set up Your Account:")
     print("2. Log In")
     print("3. Exit\n")
@@ -144,12 +140,12 @@ def userUI():
     if (ui_prompt == 1):
         createUserAcccount()
     elif (ui_prompt == 2):
-        authenticateUser()
+        userAuthorization()
     elif (ui_prompt == 3):
         exit()
     else:
         print("Enter a valid option")
-        homeAnyOther()
+        uiSubMenu()
 
 
 # Creates an infinite loop to run the program
